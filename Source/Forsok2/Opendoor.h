@@ -6,6 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "Engine/StaticMeshActor.h"
 #include "Engine/TriggerVolume.h"
+#include "Engine/World.h"
+#include "Engine/LocalPlayer.h"
 #include "Opendoor.generated.h"
 
 
@@ -22,6 +24,8 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	void OpenDoor();
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -33,4 +37,7 @@ private:
 private:
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PreasurePlate;
+
+private:
+	AActor* actorThatOpens;
 };
