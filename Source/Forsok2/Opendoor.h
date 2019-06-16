@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/StaticMeshActor.h"
+#include "Engine/TriggerVolume.h"
 #include "Opendoor.generated.h"
 
 
@@ -25,5 +26,11 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+private: 
+	UPROPERTY(VisibleAnywhere)
+	float angle = 90.0f;
+	
+private:
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume* PreasurePlate;
 };
