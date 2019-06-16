@@ -17,18 +17,19 @@ UOpendoor::UOpendoor()
 void UOpendoor::BeginPlay()
 {
 	Super::BeginPlay();
+	Door = GetOwner();
 
 	actorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 void UOpendoor::OpenDoor()
 {
-	AActor* Door = GetOwner();
+	Door->SetActorRotation(FRotator(0.f, angle, 0.f));
+}
 
-	FRotator rotasjon = FRotator(0.f, 60.f, 0.f);
-
-	Door->SetActorRotation(rotasjon);
-	// ...
+void UOpendoor::CloseDoor()
+{
+	Door->SetActorRotation(FRotator(0.f, 0.f, 0.f));
 }
 
 
@@ -40,8 +41,12 @@ void UOpendoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	if (PreasurePlate && PreasurePlate->IsOverlappingActor(actorThatOpens))
 	{
 		OpenDoor();
+		DoorLastOpenTime = GetWorld()->GetTimeSeconds();
 	}
-
+	if (GetWorld()->GetTimeSeconds() - DoorLastOpenTime > DoorCloseDelay) 
+	{
+		CloseDoor();
+	}
 	// ...
 }
 
