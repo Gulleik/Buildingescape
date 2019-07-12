@@ -12,14 +12,11 @@ UOpendoor::UOpendoor()
 	// ...
 }
 
-
 // Called when the game starts
 void UOpendoor::BeginPlay()
 {
 	Super::BeginPlay();
 	Door = GetOwner();
-
-	actorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 void UOpendoor::OpenDoor()
@@ -38,7 +35,7 @@ void UOpendoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (PreasurePlate && PreasurePlate->IsOverlappingActor(actorThatOpens))
+	if (getTotalMassOfActorsOnPlate() > Triggerlimit)
 	{
 		OpenDoor();
 		DoorLastOpenTime = GetWorld()->GetTimeSeconds();

@@ -34,12 +34,12 @@ public:
 private: 
 	UPROPERTY(EditAnywhere)
 	float angle = 90.0f;
+
+	UPROPERTY(EditAnywhere)
+	float Triggerlimit = 50.0f;
 	
-private:
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PreasurePlate;
-
-	AActor* actorThatOpens;
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 1.f;
@@ -48,4 +48,5 @@ private:
 
 	AActor* Door;
 
+	float getTotalMassOfActorsOnPlate();
 };

@@ -4,3 +4,8 @@ Saved/
 DerivedDataCache/
 Intermediate/
 .vs/
+*.VS.db
+*.suo
+*.VC.opendb
+*.sln
+

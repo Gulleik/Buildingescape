@@ -10,6 +10,7 @@
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/PrimitiveComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "Grabber.generated.h"
 
 
@@ -39,6 +40,7 @@ private:
 	UInputComponent* InputComponent = nullptr;
 
 	void Grab();
+
 	void Release();
 	//find attached Physicshandle
 	void findPhysicsHandleComponent();
@@ -48,4 +50,10 @@ private:
 
 	//return hit for first Physicsbody in reach
 	FHitResult getFirstPhysicsBodyInREach() const;
+
+	//return linetrace of reach
+	FVector getLineTraceEnd() const;
+
+	FVector getLineTraceStart() const;
+
 };
