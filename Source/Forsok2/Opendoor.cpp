@@ -2,6 +2,8 @@
 
 #include "Opendoor.h"
 
+#define OUT
+
 // Sets default values for this component's properties
 UOpendoor::UOpendoor()
 {
@@ -34,6 +36,7 @@ void UOpendoor::CloseDoor()
 void UOpendoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	getTotalMassOfActorsOnPlate();
 
 	if (getTotalMassOfActorsOnPlate() > Triggerlimit)
 	{
@@ -45,5 +48,18 @@ void UOpendoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 		CloseDoor();
 	}
 	// ...
+}
+
+float UOpendoor::getTotalMassOfActorsOnPlate()
+{
+	float totalMass = 0.f;
+
+	TArray<AActor*> OverlappingActors;
+	PreasurePlate->GetOverlappingActors(OUT OverlappingActors);
+	for (const auto& actor : OverlappingActors) {
+		UE_LOG(LogTemp, Warning, TEXT("%s on preassureplate"), *actor->GetName());
+		totalMass += actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+	}
+	return totalMass;
 }
 

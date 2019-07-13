@@ -8,6 +8,7 @@
 #include "Engine/TriggerVolume.h"
 #include "Engine/World.h"
 #include "Engine/LocalPlayer.h"
+#include "Components/PrimitiveComponent.h"
 #include "Opendoor.generated.h"
 
 
@@ -36,7 +37,7 @@ private:
 	float angle = 90.0f;
 
 	UPROPERTY(EditAnywhere)
-	float Triggerlimit = 50.0f;
+	float Triggerlimit = 35.0f;
 	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PreasurePlate;
