@@ -47,6 +47,7 @@ void UGrabber::Grab() {
 	auto actorHit = hitResult.GetActor();
 
 	if (actorHit) {
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->GrabComponentAtLocation(
 			componentToGrab,
 			NAME_None,
@@ -57,6 +58,7 @@ void UGrabber::Grab() {
 
 //Release action
 void UGrabber::Release() {
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
 
@@ -110,7 +112,7 @@ FHitResult UGrabber::getFirstPhysicsBodyInREach() const
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	if (!PhysicsHandle) { return; }
 	if (PhysicsHandle->GrabbedComponent)
 	{
 		PhysicsHandle->SetTargetLocation(getLineTraceEnd());

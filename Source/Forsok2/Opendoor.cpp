@@ -19,15 +19,20 @@ void UOpendoor::BeginPlay()
 {
 	Super::BeginPlay();
 	Door = GetOwner();
+	if (!PreasurePlate) {
+		UE_LOG(LogTemp, Error, TEXT("%s missing preassurplate"), *GetOwner()->GetName());
+	}
 }
 
 void UOpendoor::OpenDoor()
 {
+	if (!Door) { return; }
 	Door->SetActorRotation(FRotator(0.f, angle, 0.f));
 }
 
 void UOpendoor::CloseDoor()
 {
+	if (!Door) { return; }
 	Door->SetActorRotation(FRotator(0.f, 0.f, 0.f));
 }
 
@@ -55,6 +60,7 @@ float UOpendoor::getTotalMassOfActorsOnPlate()
 	float totalMass = 0.f;
 
 	TArray<AActor*> OverlappingActors;
+	if (!PreasurePlate) { return totalMass; }
 	PreasurePlate->GetOverlappingActors(OUT OverlappingActors);
 	for (const auto& actor : OverlappingActors) {
 		UE_LOG(LogTemp, Warning, TEXT("%s on preassureplate"), *actor->GetName());

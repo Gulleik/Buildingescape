@@ -40,14 +40,14 @@ private:
 	float Triggerlimit = 35.0f;
 	
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PreasurePlate;
+	ATriggerVolume* PreasurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 1.f;
 
 	float DoorLastOpenTime;
 
-	AActor* Door;
+	AActor* Door = nullptr;
 
 	float getTotalMassOfActorsOnPlate();
 };
